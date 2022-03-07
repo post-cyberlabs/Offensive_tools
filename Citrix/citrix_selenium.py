@@ -3,6 +3,9 @@
 '''
 Author: POST Cyberforce - COS (Offensive Security Team)
 
+Usage:
+python3 citrix_selenium.py https://citrix.domain.com/ UserName Rand0mPwd123 123456
+
 Description:
 This script is used to replay Citrix credentials + OTP gathered during phishing attack on the real Citrix targeted host.
 - Request lib automatically grab the authenticated cookie and passed it to Selenium
@@ -12,7 +15,8 @@ This script is used to replay Citrix credentials + OTP gathered during phishing 
 Note:
 - Use you own way to pass the phished credentials to this script
 - You can disable the Selenium function if you want to use the session cookie by yourself
-- use the chromedriver version according to your Chrome version
+- Use the chromedriver version according to your Chrome version
+- This script works with Citrix Netscaler latest version, not with Citrix Netscaler Unified Gateway version
 '''
 
 from termcolor import colored
@@ -174,7 +178,7 @@ if __name__ == '__main__':
 
     if len(sys.argv) != 5:
         print("Usage: %s <host> <username> <password> <otp>" % (sys.argv[0]))
-        print("Example: %s https://newras.corp.post.lu/ UserName Rand0mPwd123* 123456)" % (sys.argv[0]))
+        print("Example: %s https://citrix.domain.com/ UserName Rand0mPwd123* 123456)" % (sys.argv[0]))
         quit()
 
     host = sys.argv[1]
