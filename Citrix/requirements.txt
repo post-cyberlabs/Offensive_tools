@@ -1,0 +1,5 @@
+selenium_stealth
+requests
+selenium
+urllib3
+termcolor
