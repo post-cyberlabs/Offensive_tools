@@ -14,7 +14,7 @@ This script is used to replay Citrix credentials + OTP gathered during phishing 
 
 Note:
 - Use you own way to pass the phished credentials to this script
-- You can disable the Selenium function if you want to use the session cookie by yourself
+- You can disable the Selenium function if you want to use the session cookie by yourself or run the script in full headless mode
 - Use the chromedriver version according to your Chrome version
 '''
 
