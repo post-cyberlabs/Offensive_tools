@@ -1,5 +1,20 @@
 #!/usr/bin/python3
 
+'''
+Author: POST Cyberforce - COS (Offensive Security Team)
+
+Description:
+This script is used to replay Citrix credentials + OTP gathered during phishing attack on the real Citrix targeted host.
+- Request lib automatically grab the authenticated cookie and passed it to Selenium
+- Selenium automatically load the cookie into the browser and connect to the Citrix using a new Thread in order to be able to open several detached session at a time
+- Selenium automatically refresh the cookie by refreshing the page every 15 sec.
+
+Note:
+- Use you own way to pass the phished credentials to this script
+- You can disable the Selenium function if you want to use the session cookie by yourself
+- use the chromedriver version according to your Chrome version
+'''
+
 from termcolor import colored
 import sys, time
 import requests
@@ -151,7 +166,7 @@ def selenium_login(cookie):
         pass
 
     while True:
-        time.sleep(5)
+        time.sleep(15)
         driver.refresh()
 
 
