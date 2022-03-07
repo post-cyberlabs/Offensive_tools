@@ -16,7 +16,6 @@ Note:
 - Use you own way to pass the phished credentials to this script
 - You can disable the Selenium function if you want to use the session cookie by yourself
 - Use the chromedriver version according to your Chrome version
-- This script works with Citrix Netscaler latest version, not with Citrix Netscaler Unified Gateway version
 '''
 
 from termcolor import colored
