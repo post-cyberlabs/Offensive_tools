@@ -52,8 +52,6 @@ namespace PostDump
             return 1;
         }
 
-        [DllImport("kernel32")]
-        internal static extern BOOL GetProcessId(HANDLE hObject);
 
         [DllImport("kernel32")]
         internal static extern DWORD PssQuerySnapshot(HPSS SnapshotHandle, Data.Native.PSS_QUERY_INFORMATION_CLASS InformationClass, out IntPtr Buffer, DWORD BufferLength);
@@ -224,7 +222,6 @@ namespace PostDump
             // Cleaning
             IntPtr VcHandle;
             PssQuerySnapshot(sHandle, Data.Native.PSS_QUERY_INFORMATION_CLASS.PSS_QUERY_VA_CLONE_INFORMATION, out VcHandle, IntPtr.Size);
-            var cloneProid = GetProcessId(VcHandle);
             DWORD free = PssFreeSnapshot(Process.GetCurrentProcess().Handle, sHandle);
             CloseHandle(VcHandle);
             Marshal.FreeHGlobal(CbackParam);
