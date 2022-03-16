@@ -3,10 +3,14 @@
 ----
 
 PostDump is a C# tool developt by COS team (Cyber Offensive and Security) of POST Luxembourg.
+
 It is yet another simple tool to perform a memory dump (lsass) using several technics to bypass EDR hooking and lsass protection.
+
 Unlike tools like EDRSandBlast, it focused on unhooking only functions stricly required in order to dump the memory, thus done by using DInvoke to map required unhooked DLL. With an exception for NtReadVirtualMemory which is dynamicly patched if hook is detected.
+
 Currently sucessfully tested on Tehtris XDR.
-Project in constant improvement.
+
+Project in constant improvement (hook detection, direct syscalls).
 
 ## Technics used
 
