@@ -200,7 +200,7 @@ namespace PostDump
                                 Data.Native.MINIDUMP_TYPE.MiniDumpWithModuleHeaders;
 
 
-            Data.PE.PE_MANUAL_MAP moduleDetails2 = ManualMap.Map.MapModuleToMemory("C:\\Windows\\System32\\dbgcore.dll");
+            Data.PE.PE_MANUAL_MAP moduleDetails2 = ManualMap.Map.MapModuleToMemory("C:\\Windows\\System32\\dbghelp.dll");
             IntPtr mini = DInvoke.Generic.GetExportAddress(moduleDetails2.ModuleBase, "MiniDumpWriteDump");
             Console.WriteLine("MiniDumpWriteDump: " + Check(mini).value);
             MiniDumpWriteDump MDWD = (MiniDumpWriteDump)Marshal.GetDelegateForFunctionPointer(mini, typeof(MiniDumpWriteDump));
