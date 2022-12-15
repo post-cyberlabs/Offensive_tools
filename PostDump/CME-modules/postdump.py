@@ -82,7 +82,7 @@ class CMEModule:
     
         timestamp = datetime.today().strftime('%Y%m%d_%H%M')
         dump_name = ''.join(random.choice(string.ascii_letters + string.digits) for _ in range(8)) + ".tmp"
-        command = 'cd '+ self.tmp_dir  + ' && '+ self.tmp_dir + self.postdmp + ' ' + dump_name
+        command = 'cd '+ self.tmp_dir  + ' && '+ self.tmp_dir + self.postdmp + ' -o ' + dump_name
         context.log.info('Executing command {}'.format(command))
         dump = False
         p = connection.execute(command, True)
