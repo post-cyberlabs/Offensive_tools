@@ -51,7 +51,7 @@ To use PostDump with Cobaltstrike, you must download and compile [BOFNET](https:
 
 ## CME and LSASSY modules
 - Both use embedded base64 binary and autoclean
-- Will not work with --encrypt or --signature
+- Will not work with --encrypt or --signature for the moment
 - copy CME-module/postdump.py into your CME modules folder
 - copy LSASSY-module/postdump.py into your LSASSY modules folder
 - `crackmapexec smb x.x.x.x -u user -p 'password' -M postdump [--options]`
