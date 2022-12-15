@@ -24,7 +24,7 @@ Dump LSASS:
 
     -e, --encrypt       Encrypt dump in-memory
 
-    -s, --signature     Generate fake Minidump signature
+    -s, --signature     Generate invalid signature
 
     --snap              Use snapshot technic
 
