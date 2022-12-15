@@ -58,7 +58,7 @@ To use PostDump with Cobaltstrike, you must download and compile [BOFNET](https:
 - `crackmapexec smb x.x.x.x -u user -p 'password' -M lsassy -o METHOD=postdump`
 
 
-## Improvements idea
+## Improvements idea
 - Use Syscalls instead of Dinvoke
 - AMSI/ETW patching
 - Implement more dump technics (duplicate handle, seclogon ..)
