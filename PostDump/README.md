@@ -2,7 +2,7 @@
 
 ----
 
-PostDump is a C# tool developt by COS team (Cyber Offensive and Security) of POST Luxembourg.
+PostDump is a C# tool developt by COS team (CyberForce Offensive Security) of POST Luxembourg.
 
 It is yet another simple tool to perform a LSASS memory dump using few technics to avoid detection.
 
