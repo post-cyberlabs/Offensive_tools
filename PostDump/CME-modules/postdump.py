@@ -1,7 +1,3 @@
-# postdmpdump module for CME python3
-# author of the module : github.com/mpgn
-# postdmpdump: https://github.com/helpsystems/postdmpdump
-
 import base64
 import sys
 import os
