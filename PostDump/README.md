@@ -24,7 +24,7 @@ Dump LSASS:
 
     -e, --encrypt       Encrypt dump in-memory
 
-    -s, --signature     Generate invalid signature
+    -s, --signature     Generate invalid Minidump signature
 
     --snap              Use snapshot technic
 
@@ -46,12 +46,11 @@ To use PostDump with Cobaltstrike, you must download and compile [BOFNET](https:
 - `beacon> bofnet_init`
 - `beacon> bofnet_load PostDump.exe`
 - `beacon> bofnet_execute POSTDump.BOFNET [args]`
-- If you plan to NOT use BOFNET (eg: binary uploaded on a system), it is preferable to remove it from the project before compiling, otherwise you'll need the BOFNET.dll file on the system too.
 
 
 ## CME and LSASSY modules
 - Both use embedded base64 binary and autoclean
-- Will not work with --encrypt or --signature for the moment
+- Will not work with --encrypt or --signature
 - copy CME-module/postdump.py into your CME modules folder
 - copy LSASSY-module/postdump.py into your LSASSY modules folder
 - `crackmapexec smb x.x.x.x -u user -p 'password' -M postdump [--options]`
@@ -68,7 +67,6 @@ To use PostDump with Cobaltstrike, you must download and compile [BOFNET](https:
 - You can build using .NET Framework 4.5.1 as-is.
 - Depending of the CLR version installed on the system where you execute PostDump, you may need to downgrade to .NET 3.5 [more info here](https://learn.microsoft.com/fr-fr/dotnet/framework/migration-guide/versions-and-dependencies)
 - If you downgrade to .NET Framework 3.5, you'll need to downgrade CommandLineParser dependance too
-- If you plan to NOT use BOFNET, it is preferable to remove it from the project before compiling, otherwise you'll need the BOFNET.dll file on the system to execute the tool.
 
 
 ## Credit
