@@ -13,6 +13,7 @@ The dump logic code is saved under the `POSTMinidump` project, feel free to use 
 
 Such as NanoDump, you can encrypt or use an invalid signature for the minidump, but also use BOFNET to avoid touching disk and download file to CobaltStrike C2 directly.
 
+Works on x64 only.
 
 ## Usage
 
