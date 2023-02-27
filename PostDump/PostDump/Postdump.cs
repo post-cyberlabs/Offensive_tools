@@ -9,6 +9,7 @@ using Minidump = POSTMiniDump.MiniDump;
 using MinidumpUtils = POSTMiniDump.Utils;
 using ManualMap = DCall.ManualMap;
 using BOFNET;
+using System.IO;
 
 namespace POSTDump
 {
@@ -24,6 +25,9 @@ namespace POSTDump
         {
             [Option('o', "output", Required = false, HelpText = "output filename [default: Machine_datetime.dmp]")]
             public string Output { get; set; }
+
+            [Option('d', "directory", Required = false, HelpText = "output directory [default: current working directory]")]
+            public string Directory { get; set; }
 
             [Option('e', "encrypt", Required = false, HelpText = "Encrypt dump in-memory")]
             public bool Encrypt { get; set; }
@@ -70,7 +74,26 @@ namespace POSTDump
                        {
                            Output = o.Output;
                        }
+                       if (o.Directory != null)
+                       {
+                           try
+                           {
+                               FileAttributes attr = File.GetAttributes(o.Directory);
+                               if ((attr & FileAttributes.Directory) == FileAttributes.Directory)
+                               {
+                                   Output = o.Directory + Output;
+                               }
+                               else
+                               {
+                                   Console.WriteLine("Provided target directory is not a directory. Using current working directory.");
+                               }
+                           }
+                           catch (Exception e)
+                           {
+                               Console.WriteLine("Provided target directory is not a directory. Using current working directory.");
+                           }
 
+                       }
                        if (o.Encrypt)
                        {
                            Encrypt = true;
@@ -233,4 +256,3 @@ namespace POSTDump
         }        
     }
 }
-
