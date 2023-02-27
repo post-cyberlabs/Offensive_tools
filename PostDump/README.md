@@ -23,6 +23,8 @@ Dump LSASS:
 
     -o, --output        output filename [default: Machine_datetime.dmp]
 
+    -d, --directory     output directory [default: current working directory]
+
     -e, --encrypt       Encrypt dump in-memory
 
     -s, --signature     Generate invalid Minidump signature
