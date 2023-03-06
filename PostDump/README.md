@@ -21,7 +21,7 @@ Dump LSASS:
 
     c:\Temp>PostDump.exe --help
 
-    -o, --output        output filename [default: Machine_datetime.dmp]
+    -o, --output        Output filename [default: Machine_datetime.dmp] (fullpath handled)
 
     -e, --encrypt       Encrypt dump in-memory
 
