@@ -42,8 +42,8 @@ Dump LSASS:
 ## BOFNET
 
 To use PostDump with Cobaltstrike, you must download and compile [BOFNET](https://github.com/CCob/BOF.NET):
-- Build PostDump and place CommandLine.dll file into same folder as BOFNET.cna
-- import the .cna file into your cobalt
+- Build PostDump
+- import the BOFNET .cna file into your cobalt
 - `beacon> bofnet_init`
 - `beacon> bofnet_load PostDump.exe`
 - `beacon> bofnet_execute POSTDump.BOFNET [args]`
