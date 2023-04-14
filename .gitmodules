@@ -1,3 +1,6 @@
 [submodule "dark-doh"]
 	path = dark-doh
 	url = https://github.com/darksh3llRU/dark-doh
+[submodule "SharpHound4Cobalt"]
+	path = SharpHound4Cobalt
+	url = git@github.com:Hypnoze57/SharpHound4Cobalt
