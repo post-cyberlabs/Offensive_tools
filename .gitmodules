@@ -3,4 +3,13 @@
 	url = https://github.com/darksh3llRU/dark-doh
 [submodule "SharpHound4Cobalt"]
 	path = SharpHound4Cobalt
-	url = git@github.com:Hypnoze57/SharpHound4Cobalt
+	url = https://github.com/Hypnoze57/SharpHound4Cobalt
+[submodule "POSTDump"]
+	path = POSTDump
+	url = https://github.com/YOLOP0wn/POSTDump
+[submodule "EchoDrv"]
+	path = EchoDrv
+	url = https://github.com/YOLOP0wn/EchoDrv
+[submodule "CheckDrivers"]
+	path = CheckDrivers
+	url = https://github.com/YOLOP0wn/CheckDrivers
