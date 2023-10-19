@@ -3,7 +3,7 @@
 - The authors do not have any responsibility and/or liability for how you will use this information and the source code!
 - Everything that anyone can find in this repository is only for educational and research purposes, and the authors have no responsibility for how you will use the data found.
 
-JSP webshell Trololo with pivoting via Neo-reGeorg or Pivotnacci
+JSP webshell with pivoting via Neo-reGeorg or Pivotnacci
 
 1) Command exec via GET or POST
 
