@@ -1,0 +1,13 @@
+Z:\Offensive_tools\PostDump\PostDump\bin\x64\Release\PostDump.exe.config
+Z:\Offensive_tools\PostDump\PostDump\bin\x64\Release\PostDump.exe
+Z:\Offensive_tools\PostDump\PostDump\bin\x64\Release\PostDump.pdb
+Z:\Offensive_tools\PostDump\PostDump\bin\x64\Release\System.Runtime.InteropServices.RuntimeInformation.dll
+Z:\Offensive_tools\PostDump\PostDump\bin\x64\Release\CommandLine.xml
+Z:\Offensive_tools\PostDump\PostDump\obj\x64\Release\POSTDump.csproj.AssemblyReference.cache
+Z:\Offensive_tools\PostDump\PostDump\obj\x64\Release\POSTDump.csproj.SuggestedBindingRedirects.cache
+Z:\Offensive_tools\PostDump\PostDump\obj\x64\Release\POSTDump.csproj.CoreCompileInputs.cache
+Z:\Offensive_tools\PostDump\PostDump\obj\x64\Release\POSTDump.csproj.Fody.CopyLocal.cache
+Z:\Offensive_tools\PostDump\PostDump\obj\x64\Release\POSTDump.csproj.Fody.RuntimeCopyLocal.cache
+Z:\Offensive_tools\PostDump\PostDump\obj\x64\Release\POSTDump.csproj.CopyComplete
+Z:\Offensive_tools\PostDump\PostDump\obj\x64\Release\PostDump.exe
+Z:\Offensive_tools\PostDump\PostDump\obj\x64\Release\PostDump.pdb
