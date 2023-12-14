@@ -10,3 +10,6 @@
 [submodule "CheckDrivers"]
 	path = CheckDrivers
 	url = https://github.com/YOLOP0wn/CheckDrivers
+[submodule "dark-doh"]
+	path = dark-doh
+	url = https://github.com/darksh3llRU/dark-doh
